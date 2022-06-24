@@ -202,11 +202,11 @@ public class Commands implements CommandExecutor {
             if (args.length == 1) {
                 if (cfg.contains("promocodes." + args[0])) {
                     int uses = cfg.getInt("promocodes." + args[0] + ".uses");
-                    if (!cfg.getStringList("promocodes." + args[0] + ".players").contains(p.getName()) || cfg.getStringList("promocodes." + args[0] + ".players").isEmpty()) {
+                    if (!cfg.getStringList("promocodes." + args[0] + ".players").contains(p.getName())) {
                         if (uses > 0) {
                             int usesminus = uses - 1;
                             cfg.set("promocodes." + args[0] + ".uses", usesminus);
-                            List list = new ArrayList();
+                            List list = new ArrayList(cfg.getStringList("promocodes." + args[0] + ".players"));
                             list.add(p.getName());
                             cfg.set("promocodes." + args[0] + ".players", list);
                             Main.instance.saveConfig();
